@@ -3,7 +3,7 @@ from mysql.connector import Error
 import logging
 
 class DatabaseConnection:
-    def __init__(self, host="localhost", user="root", password="quan156323", database="inventory_db"):
+    def __init__(self, host="localhost", user="root", password="", database="inventory_db"):
         self.host = host
         self.user = user
         self.password = password
