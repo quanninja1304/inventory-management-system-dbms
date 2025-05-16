@@ -43,6 +43,7 @@ pip install -r requirements.txt
 - Update your `database.py` with the correct connection credentials
 ---
 ## 📁 Project Structure
+```
 inventory-management-system-dbms/  
 ├── main.py                 # Entry point  
 ├── models/                 # Product, Supplier, Inventory, etc.  
