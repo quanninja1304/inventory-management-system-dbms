@@ -1,0 +1,407 @@
+from database import DatabaseConnection
+from models import Product, Supplier, Warehouse, Inventory, StockEntry, InventoryHistory
+from view import MainView
+import tkinter as tk
+from datetime import datetime
+
+class Controller:
+    def __init__(self, root):
+        self.db = DatabaseConnection()
+        self.view = MainView(root)
+        self.product_model = Product(self.db)
+        self.supplier_model = Supplier(self.db)
+        self.warehouse_model = Warehouse(self.db)
+        self.inventory_model = Inventory(self.db)
+        self.stock_entry_model = StockEntry(self.db)
+        self.history_model = InventoryHistory(self.db)
+        self.setup_event_handlers()
+        self.load_initial_data()
+
+    def setup_event_handlers(self):
+        self.view.products_tree.bind('<<TreeviewSelect>>', self.on_product_select)
+        self.view.products_tab.children['!labelframe2'].children['!frame'].children['!button'].configure(command=self.add_product)
+        self.view.products_tab.children['!labelframe2'].children['!frame'].children['!button2'].configure(command=self.update_product)
+        self.view.products_tab.children['!labelframe2'].children['!frame'].children['!button3'].configure(command=self.delete_product)
+        self.view.products_tab.children['!labelframe2'].children['!frame'].children['!button4'].configure(command=self.view.clear_product_fields)
+
+        self.view.suppliers_tree.bind('<<TreeviewSelect>>', self.on_supplier_select)
+        self.view.suppliers_tab.children['!labelframe2'].children['!frame'].children['!button'].configure(command=self.add_supplier)
+        self.view.suppliers_tab.children['!labelframe2'].children['!frame'].children['!button2'].configure(command=self.update_supplier)
+        self.view.suppliers_tab.children['!labelframe2'].children['!frame'].children['!button3'].configure(command=self.delete_supplier)
+        self.view.suppliers_tab.children['!labelframe2'].children['!frame'].children['!button4'].configure(command=self.view.clear_supplier_fields)
+
+        self.view.warehouses_tree.bind('<<TreeviewSelect>>', self.on_warehouse_select)
+        self.view.warehouses_tab.children['!labelframe2'].children['!frame'].children['!button'].configure(command=self.add_warehouse)
+        self.view.warehouses_tab.children['!labelframe2'].children['!frame'].children['!button2'].configure(command=self.update_warehouse)
+        self.view.warehouses_tab.children['!labelframe2'].children['!frame'].children['!button3'].configure(command=self.delete_warehouse)
+        self.view.warehouses_tab.children['!labelframe2'].children['!frame'].children['!button4'].configure(command=self.view.clear_warehouse_fields)
+
+        self.view.inventory_tree.bind('<<TreeviewSelect>>', self.on_inventory_select)
+        self.view.inventory_tab.children['!labelframe'].children['!button'].configure(command=self.search_inventory)
+        self.view.inventory_tab.children['!labelframe'].children['!button2'].configure(command=self.show_all_inventory)
+        self.view.inventory_tab.children['!labelframe'].children['!button3'].configure(command=self.show_low_stock)
+
+        self.view.stock_entry_tab.children['!labelframe'].children['!frame'].children['!button'].configure(command=self.add_stock_entry)
+        self.view.stock_entry_tab.children['!labelframe'].children['!frame'].children['!button2'].configure(command=self.view.clear_stock_entry_fields)
+
+        self.view.reports_tab.children['!labelframe'].children['!button'].configure(command=self.show_low_stock_report)
+        self.view.reports_tab.children['!labelframe'].children['!button2'].configure(command=self.show_stock_value_report)
+        self.view.reports_tab.children['!labelframe'].children['!button3'].configure(command=self.show_stock_per_warehouse)
+        self.view.reports_tab.children['!labelframe'].children['!button4'].configure(command=self.show_supplier_delivery_history)
+        self.view.reports_tab.children['!labelframe'].children['!button5'].configure(command=self.show_transaction_history)
+        self.view.reports_tab.children['!labelframe'].children['!labelframe'].children['!button'].configure(command=self.apply_date_range)
+
+    def load_initial_data(self):
+        self.load_products()
+        self.load_suppliers()
+        self.load_warehouses()
+        self.load_inventory()
+        self.load_stock_entries()
+        self.load_comboboxes()
+
+    def load_comboboxes(self):
+        products = self.product_model.get_all_products()
+        warehouses = self.warehouse_model.get_all_warehouses()
+        suppliers = self.supplier_model.get_all_suppliers()
+        self.view.supplier_combobox['values'] = [f"{s['SupplierID']}: {s['SupplierName']}" for s in suppliers]
+        self.view.inventory_product_combo['values'] = [f"{p['ProductID']}: {p['ProductName']}" for p in products]
+        self.view.inventory_warehouse_combo['values'] = [f"{w['WarehouseID']}: {w['WarehouseName']}" for w in warehouses]
+        self.view.entry_product_combo['values'] = [f"{p['ProductID']}: {p['ProductName']}" for p in products]
+        self.view.entry_warehouse_combo['values'] = [f"{w['WarehouseID']}: {w['WarehouseName']}" for w in warehouses]
+
+    def load_products(self):
+        for item in self.view.products_tree.get_children():
+            self.view.products_tree.delete(item)
+        products = self.product_model.get_all_products()
+        for p in products:
+            self.view.products_tree.insert("", "end", values=(p['ProductID'], p['ProductName'], p['UnitPrice'], p['SupplierName']))
+
+    def load_suppliers(self):
+        for item in self.view.suppliers_tree.get_children():
+            self.view.suppliers_tree.delete(item)
+        suppliers = self.supplier_model.get_all_suppliers()
+        for s in suppliers:
+            self.view.suppliers_tree.insert("", "end", values=(s['SupplierID'], s['SupplierName'], s['Address'], s['PhoneNumber']))
+
+    def load_warehouses(self):
+        for item in self.view.warehouses_tree.get_children():
+            self.view.warehouses_tree.delete(item)
+        warehouses = self.warehouse_model.get_all_warehouses()
+        for w in warehouses:
+            self.view.warehouses_tree.insert("", "end", values=(w['WarehouseID'], w['WarehouseName'], w['Address']))
+
+    def load_inventory(self):
+        for item in self.view.inventory_tree.get_children():
+            self.view.inventory_tree.delete(item)
+        inventory = self.inventory_model.get_inventory_levels()
+        for i in inventory:
+            self.view.inventory_tree.insert("", "end", values=(i['ProductName'], i['WarehouseName'], i['Quantity'], i['MinStockLevel']))
+
+    def load_stock_entries(self):
+        for item in self.view.stock_entry_tree.get_children():
+            self.view.stock_entry_tree.delete(item)
+        entries = self.stock_entry_model.get_all_entries()
+        for e in entries:
+            self.view.stock_entry_tree.insert("", "end", values=(e['EntryID'], e['ProductName'], e['WarehouseName'], e['Quantity'], e['EntryDate']))
+
+    def on_product_select(self, event):
+        selected = self.view.products_tree.selection()
+        if selected:
+            item = self.view.products_tree.item(selected[0])
+            product_id = item['values'][0]
+            product = self.product_model.get_product_by_id(product_id)
+            if product:
+                self.view.product_name_var.set(product['ProductName'])
+                self.view.product_desc_var.set(product['Description'] or '')
+                self.view.product_price_var.set(product['UnitPrice'])
+                supplier = self.supplier_model.get_supplier_by_id(product['SupplierID'])
+                self.view.product_supplier_var.set(f"{supplier['SupplierID']}: {supplier['SupplierName']}")
+
+    def on_supplier_select(self, event):
+        selected = self.view.suppliers_tree.selection()
+        if selected:
+            item = self.view.suppliers_tree.item(selected[0])
+            supplier_id = item['values'][0]
+            supplier = self.supplier_model.get_supplier_by_id(supplier_id)
+            if supplier:
+                self.view.supplier_name_var.set(supplier['SupplierName'])
+                self.view.supplier_address_var.set(supplier['Address'] or '')
+                self.view.supplier_phone_var.set(supplier['PhoneNumber'] or '')
+
+    def on_warehouse_select(self, event):
+        selected = self.view.warehouses_tree.selection()
+        if selected:
+            item = self.view.warehouses_tree.item(selected[0])
+            warehouse_id = item['values'][0]
+            warehouse = self.warehouse_model.get_warehouse_by_id(warehouse_id)
+            if warehouse:
+                self.view.warehouse_name_var.set(warehouse['WarehouseName'])
+                self.view.warehouse_address_var.set(warehouse['Address'] or '')
+
+    def on_inventory_select(self, event):
+        selected = self.view.inventory_tree.selection()
+        if selected:
+            item = self.view.inventory_tree.item(selected[0])
+            values = item['values']
+            self.view.inventory_product_var.set(values[0])
+            self.view.inventory_warehouse_var.set(values[1])
+
+    def add_product(self):
+        name = self.view.product_name_var.get()
+        desc = self.view.product_desc_var.get()
+        price = self.view.product_price_var.get()
+        supplier = self.view.product_supplier_var.get()
+        if name and price and supplier:
+            try:
+                supplier_id = int(supplier.split(":")[0])
+                if self.product_model.add_product(name, desc, float(price), supplier_id):
+                    self.load_products()
+                    self.load_comboboxes()
+                    self.view.clear_product_fields()
+                    self.view.show_info("Success", "Product added")
+                else:
+                    self.view.show_error("Error", "Failed to add product")
+            except ValueError:
+                self.view.show_error("Error", "Invalid input")
+        else:
+            self.view.show_error("Error", "Missing required fields")
+
+    def update_product(self):
+        selected = self.view.products_tree.selection()
+        if selected:
+            item = self.view.products_tree.item(selected[0])
+            product_id = item['values'][0]
+            name = self.view.product_name_var.get()
+            desc = self.view.product_desc_var.get()
+            price = self.view.product_price_var.get()
+            supplier = self.view.product_supplier_var.get()
+            if name and price and supplier:
+                try:
+                    supplier_id = int(supplier.split(":")[0])
+                    if self.product_model.update_product(product_id, name, desc, float(price), supplier_id):
+                        self.load_products()
+                        self.load_comboboxes()
+                        self.view.clear_product_fields()
+                        self.view.show_info("Success", "Product updated")
+                    else:
+                        self.view.show_error("Error", "Failed to update product")
+                except ValueError:
+                    self.view.show_error("Error", "Invalid input")
+            else:
+                self.view.show_error("Error", "Missing required fields")
+
+    def delete_product(self):
+        selected = self.view.products_tree.selection()
+        if selected:
+            item = self.view.products_tree.item(selected[0])
+            product_id = item['values'][0]
+            if self.view.ask_yes_no("Confirm", "Delete this product?"):
+                if self.product_model.delete_product(product_id):
+                    self.load_products()
+                    self.load_comboboxes()
+                    self.view.clear_product_fields()
+                    self.view.show_info("Success", "Product deleted")
+                else:
+                    self.view.show_error("Error", "Failed to delete product")
+
+    def add_supplier(self):
+        name = self.view.supplier_name_var.get()
+        address = self.view.supplier_address_var.get()
+        phone = self.view.supplier_phone_var.get()
+        if name:
+            if self.supplier_model.add_supplier(name, address, phone):
+                self.load_suppliers()
+                self.load_comboboxes()
+                self.view.clear_supplier_fields()
+                self.view.show_info("Success", "Supplier added")
+            else:
+                self.view.show_error("Error", "Failed to add supplier")
+        else:
+            self.view.show_error("Error", "Missing required fields")
+
+    def update_supplier(self):
+        selected = self.view.suppliers_tree.selection()
+        if selected:
+            item = self.view.suppliers_tree.item(selected[0])
+            supplier_id = item['values'][0]
+            name = self.view.supplier_name_var.get()
+            address = self.view.supplier_address_var.get()
+            phone = self.view.supplier_phone_var.get()
+            if name:
+                if self.supplier_model.update_supplier(supplier_id, name, address, phone):
+                    self.load_suppliers()
+                    self.load_comboboxes()
+                    self.view.clear_supplier_fields()
+                    self.view.show_info("Success", "Supplier updated")
+                else:
+                    self.view.show_error("Error", "Failed to update supplier")
+            else:
+                self.view.show_error("Error", "Missing required fields")
+
+    def delete_supplier(self):
+        selected = self.view.suppliers_tree.selection()
+        if selected:
+            item = self.view.suppliers_tree.item(selected[0])
+            supplier_id = item['values'][0]
+            if self.view.ask_yes_no("Confirm", "Delete this supplier?"):
+                if self.supplier_model.delete_supplier(supplier_id):
+                    self.load_suppliers()
+                    self.load_comboboxes()
+                    self.view.clear_supplier_fields()
+                    self.view.show_info("Success", "Supplier deleted")
+                else:
+                    self.view.show_error("Error", "Failed to delete supplier")
+
+    def add_warehouse(self):
+        name = self.view.warehouse_name_var.get()
+        address = self.view.warehouse_address_var.get()
+        if name:
+            if self.warehouse_model.add_warehouse(name, address):
+                self.load_warehouses()
+                self.load_comboboxes()
+                self.view.clear_warehouse_fields()
+                self.view.show_info("Success", "Warehouse added")
+            else:
+                self.view.show_error("Error", "Failed to add warehouse")
+        else:
+            self.view.show_error("Error", "Missing required fields")
+
+    def update_warehouse(self):
+        selected = self.view.warehouses_tree.selection()
+        if selected:
+            item = self.view.warehouses_tree.item(selected[0])
+            warehouse_id = item['values'][0]
+            name = self.view.warehouse_name_var.get()
+            address = self.view.warehouse_address_var.get()
+            if name:
+                if self.warehouse_model.update_warehouse(warehouse_id, name, address):
+                    self.load_warehouses()
+                    self.load_comboboxes()
+                    self.view.clear_warehouse_fields()
+                    self.view.show_info("Success", "Warehouse updated")
+                else:
+                    self.view.show_error("Error", "Failed to update warehouse")
+            else:
+                self.view.show_error("Error", "Missing required fields")
+
+    def delete_warehouse(self):
+        selected = self.view.warehouses_tree.selection()
+        if selected:
+            item = self.view.warehouses_tree.item(selected[0])
+            warehouse_id = item['values'][0]
+            if self.view.ask_yes_no("Confirm", "Delete this warehouse?"):
+                if self.warehouse_model.delete_warehouse(warehouse_id):
+                    self.load_warehouses()
+                    self.load_comboboxes()
+                    self.view.clear_warehouse_fields()
+                    self.view.show_info("Success", "Warehouse deleted")
+                else:
+                    self.view.show_error("Error", "Failed to delete warehouse")
+
+    def search_inventory(self):
+        product = self.view.inventory_product_var.get()
+        warehouse = self.view.inventory_warehouse_var.get()
+        inventory = self.inventory_model.get_inventory_levels()
+        for item in self.view.inventory_tree.get_children():
+            self.view.inventory_tree.delete(item)
+        if product or warehouse:
+            product_id = int(product.split(":")[0]) if product else None
+            warehouse_id = int(warehouse.split(":")[0]) if warehouse else None
+            filtered = [i for i in inventory if 
+                       (not product_id or i['ProductID'] == product_id) and
+                       (not warehouse_id or i['WarehouseID'] == warehouse_id)]
+            for i in filtered:
+                self.view.inventory_tree.insert("", "end", values=(i['ProductName'], i['WarehouseName'], i['Quantity'], i['MinStockLevel']))
+        else:
+            self.load_inventory()
+
+    def show_all_inventory(self):
+        self.view.inventory_product_var.set("")
+        self.view.inventory_warehouse_var.set("")
+        self.load_inventory()
+
+    def show_low_stock(self):
+        for item in self.view.inventory_tree.get_children():
+            self.view.inventory_tree.delete(item)
+        low_stock = self.inventory_model.check_low_stock()
+        for item in low_stock:
+            self.view.inventory_tree.insert("", "end", values=(
+                item['ProductName'], 
+                item['WarehouseName'], 
+                item['Quantity'], 
+                item['MinStockLevel']
+            ))
+
+    def add_stock_entry(self):
+        product = self.view.entry_product_var.get()
+        warehouse = self.view.entry_warehouse_var.get()
+        quantity = self.view.entry_quantity_var.get()
+        date = self.view.entry_date_var.get()
+        trans_type = self.entry_type_var.get()
+        if product and warehouse and quantity:
+            try:
+                product_id = int(product.split(":")[0])
+                warehouse_id = int(warehouse.split(":")[0])
+                quantity = int(quantity)
+                if trans_type in ["Sale", "Adjustment"]:
+                    quantity = -quantity
+                if self.stock_entry_model.add_stock_entry(product_id, warehouse_id, abs(quantity), date):
+                    self.history_model.add_history_entry(product_id, warehouse_id, quantity, trans_type, date)
+                    self.load_stock_entries()
+                    self.load_inventory()
+                    self.view.clear_stock_entry_fields()
+                    self.view.show_info("Success", "Stock entry added")
+                else:
+                    self.view.show_error("Error", "Failed to add stock entry")
+            except ValueError:
+                self.view.show_error("Error", "Invalid input")
+        else:
+            self.view.show_error("Error", "Missing required fields")
+
+    def show_low_stock_report(self):
+        self.view.report_text.delete(1.0, tk.END)
+        low_stock = self.inventory_model.check_low_stock()
+        report = "Low Stock Report\n\n"
+        for item in low_stock:
+            report += f"Product: {item['ProductName']}\nWarehouse: {item['WarehouseName']}\nQuantity: {item['Quantity']}\nMin Level: {item['MinStockLevel']}\n\n"
+        self.view.report_text.insert(tk.END, report)
+
+    def show_stock_value_report(self):
+        self.view.report_text.delete(1.0, tk.END)
+        value = self.inventory_model.calculate_total_stock_value()
+        report = f"Stock Value Report\n\nTotal Value: ${value:.2f}\n"
+        self.view.report_text.insert(tk.END, report)
+
+    def show_stock_per_warehouse(self):
+        self.view.report_text.delete(1.0, tk.END)
+        report = "Stock Per Warehouse Report\n\n"
+        warehouses = self.warehouse_model.get_all_warehouses()
+        for w in warehouses:
+            report += f"Warehouse: {w['WarehouseName']}\n"
+            inventory = self.inventory_model.get_inventory_levels()
+            for i in inventory:
+                if i['WarehouseID'] == w['WarehouseID']:
+                    report += f"  Product: {i['ProductName']}, Quantity: {i['Quantity']}\n"
+            report += "\n"
+        self.view.report_text.insert(tk.END, report)
+
+    def show_supplier_delivery_history(self):
+        self.view.report_text.delete(1.0, tk.END)
+        history = self.supplier_model.get_supplier_delivery_history()
+        report = "Supplier Delivery History\n\n"
+        for h in history:
+            report += f"Supplier: {h['SupplierName']}\nProduct: {h['ProductName']}\nQuantity: {h['Quantity']}\nDate: {h['EntryDate']}\n\n"
+        self.view.report_text.insert(tk.END, report)
+
+    def show_transaction_history(self):
+        self.view.report_text.delete(1.0, tk.END)
+        start_date = self.view.report_from_date_var.get()
+        end_date = self.view.report_to_date_var.get()
+        history = self.history_model.get_history_by_date_range(start_date, end_date)
+        report = f"Transaction History ({start_date} to {end_date})\n\n"
+        for h in history:
+            report += f"Product: {h['ProductName']}\nWarehouse: {h['WarehouseName']}\nQuantity: {h['Quantity']}\nType: {h['TransactionType']}\nDate: {h['TransactionDate']}\n\n"
+        self.view.report_text.insert(tk.END, report)
+
+    def apply_date_range(self):
+        self.show_transaction_history()
