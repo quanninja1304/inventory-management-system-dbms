@@ -1,2 +1,3 @@
-mysql-connector-python
-tk
+mysql-connector-python==9.3.0
+python-dotenv==1.0.1
+ttkbootstrap==1.10.1
