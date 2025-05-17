@@ -33,8 +33,35 @@ class MainView:
         self.setup_reports_tab()
         
         self.status_var = tk.StringVar(value="Ready")
+        self.current_user = None
+        self.user_info_frame = ttk.Frame(root)
+        self.user_info_frame.pack(side=tk.TOP, fill=tk.X)
+        self.user_info_label = ttk.Label(self.user_info_frame, text="Not logged in")
+        self.user_info_label.pack(side=tk.LEFT, padx=10)
+        self.logout_button = ttk.Button(self.user_info_frame, text="Logout")
+        self.logout_button.pack(side=tk.RIGHT, padx=10)
         ttk.Label(root, textvariable=self.status_var, relief=tk.SUNKEN).pack(side=tk.BOTTOM, fill=tk.X)
     
+    # Add these methods to the MainView class
+    def set_user(self, user):
+        self.current_user = user
+        if user:
+            self.user_info_label.config(text=f"Logged in as: {user['Username']} ({user['Role']})")
+        else:
+            self.user_info_label.config(text="Not logged in")
+
+    def add_admin_menu(self, root):
+        menubar = tk.Menu(root)
+        root.config(menu=menubar)
+        
+        admin_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Admin", menu=admin_menu)
+        admin_menu.add_command(label="User Management")
+        admin_menu.add_separator()
+        admin_menu.add_command(label="Database Backup")
+        
+        return admin_menu
+
     def setup_products_tab(self):
         left_frame = ttk.LabelFrame(self.products_tab, text="Product List")
         left_frame.grid(row=0, column=0, padx=5, pady=5, sticky="nsew")

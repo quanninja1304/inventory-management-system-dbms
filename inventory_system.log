@@ -1025,3 +1025,494 @@
         
 2025-05-17 18:54:42,192 - INFO - Data fetched: SELECT * FROM Warehouses
 2025-05-17 18:54:42,193 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 20:26:44,132 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 20:26:44,879 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 20:26:45,096 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 20:26:45,104 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 20:26:45,112 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 20:26:45,120 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:26:45,128 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:26:45,136 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 20:26:45,139 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 20:26:45,140 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 20:34:12,687 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 20:34:12,990 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 20:34:13,050 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 20:34:13,051 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 20:34:13,052 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 20:34:13,054 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:34:13,056 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:34:13,058 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 20:34:13,059 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 20:34:13,060 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 20:50:46,895 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 20:50:47,192 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 20:50:47,253 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 20:50:47,254 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 20:50:47,256 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 20:50:47,257 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:50:47,260 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:50:47,262 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 20:50:47,264 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 20:50:47,266 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 20:52:05,825 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 20:52:06,285 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 20:52:06,397 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 20:52:06,425 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 20:52:06,434 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 20:52:06,472 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:52:06,506 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:52:06,540 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 20:52:06,548 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 20:52:06,553 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 20:58:54,531 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 20:58:54,836 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 20:58:54,911 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 20:58:54,912 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 20:58:54,913 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 20:58:54,915 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:58:54,917 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:58:54,918 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 20:58:54,920 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 20:58:54,922 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 20:59:01,038 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 20:59:01,042 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 20:59:01,580 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 20:59:01,580 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 20:59:01,856 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 20:59:01,857 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 20:59:02,285 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 20:59:02,285 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 20:59:03,538 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 20:59:03,540 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 20:59:03,957 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 20:59:03,957 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 20:59:04,385 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 20:59:04,388 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 20:59:04,806 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 20:59:04,807 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 20:59:05,261 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 20:59:05,262 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 20:59:05,751 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 20:59:05,754 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 20:59:06,141 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 20:59:06,141 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 20:59:23,288 - INFO - Procedure called: CheckLowStock
+2025-05-17 20:59:27,655 - INFO - Procedure called: CalculateTotalStockValue
+2025-05-17 20:59:36,327 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 20:59:36,338 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:59:36,344 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:59:36,347 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:59:36,350 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:59:36,354 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 20:59:38,461 - INFO - Data fetched: SELECT * FROM SupplierDeliveryHistory
+2025-05-17 20:59:39,484 - INFO - Data fetched: 
+        SELECT ih.*, p.ProductName, w.WarehouseName 
+        FROM InventoryHistory ih
+        JOIN Products p ON ih.ProductID = p.ProductID
+        JOIN Warehouses w ON ih.WarehouseID = w.WarehouseID
+        WHERE DATE(ih.TransactionDate) BETWEEN %s AND %s
+        ORDER BY ih.TransactionDate DESC
+        
+2025-05-17 20:59:46,935 - INFO - Data fetched: 
+        SELECT ih.*, p.ProductName, w.WarehouseName 
+        FROM InventoryHistory ih
+        JOIN Products p ON ih.ProductID = p.ProductID
+        JOIN Warehouses w ON ih.WarehouseID = w.WarehouseID
+        WHERE DATE(ih.TransactionDate) BETWEEN %s AND %s
+        ORDER BY ih.TransactionDate DESC
+        
+2025-05-17 20:59:48,157 - INFO - Data fetched: 
+        SELECT ih.*, p.ProductName, w.WarehouseName 
+        FROM InventoryHistory ih
+        JOIN Products p ON ih.ProductID = p.ProductID
+        JOIN Warehouses w ON ih.WarehouseID = w.WarehouseID
+        WHERE DATE(ih.TransactionDate) BETWEEN %s AND %s
+        ORDER BY ih.TransactionDate DESC
+        
+2025-05-17 20:59:49,641 - INFO - Data fetched: 
+        SELECT ih.*, p.ProductName, w.WarehouseName 
+        FROM InventoryHistory ih
+        JOIN Products p ON ih.ProductID = p.ProductID
+        JOIN Warehouses w ON ih.WarehouseID = w.WarehouseID
+        WHERE DATE(ih.TransactionDate) BETWEEN %s AND %s
+        ORDER BY ih.TransactionDate DESC
+        
+2025-05-17 21:00:00,095 - INFO - Procedure called: CalculateTotalStockValue
+2025-05-17 21:00:04,985 - INFO - Data fetched: 
+        SELECT ih.*, p.ProductName, w.WarehouseName 
+        FROM InventoryHistory ih
+        JOIN Products p ON ih.ProductID = p.ProductID
+        JOIN Warehouses w ON ih.WarehouseID = w.WarehouseID
+        WHERE DATE(ih.TransactionDate) BETWEEN %s AND %s
+        ORDER BY ih.TransactionDate DESC
+        
+2025-05-17 21:00:09,833 - INFO - Data fetched: 
+        SELECT ih.*, p.ProductName, w.WarehouseName 
+        FROM InventoryHistory ih
+        JOIN Products p ON ih.ProductID = p.ProductID
+        JOIN Warehouses w ON ih.WarehouseID = w.WarehouseID
+        WHERE DATE(ih.TransactionDate) BETWEEN %s AND %s
+        ORDER BY ih.TransactionDate DESC
+        
+2025-05-17 21:40:32,166 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 21:40:32,533 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 21:40:32,620 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 21:40:32,621 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 21:40:32,622 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 21:40:32,623 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 21:40:32,625 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 21:40:32,626 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 21:40:32,628 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 21:40:32,629 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 22:16:33,942 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 22:16:34,292 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 22:16:34,359 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 22:16:34,360 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 22:16:34,363 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 22:16:34,368 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 22:16:34,371 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 22:16:34,372 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 22:16:34,373 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 22:16:34,375 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 22:22:00,864 - INFO - Query executed: 
+        INSERT INTO Products (ProductName, Description, UnitPrice, SupplierID) 
+        VALUES (%s, %s, %s, %s)
+        
+2025-05-17 22:22:00,866 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 22:22:00,868 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 22:22:00,869 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 22:22:00,871 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 22:22:02,862 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 22:22:02,864 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 22:22:05,073 - INFO - Query executed: DELETE FROM Products WHERE ProductID = %s
+2025-05-17 22:22:05,074 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 22:22:05,075 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 22:22:05,076 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 22:22:05,076 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 22:34:21,613 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 22:34:21,962 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 22:34:22,022 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 22:34:22,023 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 22:34:22,025 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 22:34:22,028 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 22:34:22,031 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 22:34:22,034 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 22:34:22,036 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 22:34:22,037 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 22:36:36,122 - INFO - Procedure called: CheckLowStock
+2025-05-17 22:40:56,529 - INFO - Single data fetched: SELECT * FROM Warehouses WHERE WarehouseID = %s
+2025-05-17 23:19:19,746 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 23:19:20,531 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 23:19:20,622 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 23:19:20,625 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 23:19:20,629 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 23:19:20,634 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 23:19:20,639 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 23:19:20,640 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 23:19:20,642 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 23:19:20,644 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 23:19:41,385 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 23:19:41,388 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 23:21:39,709 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 23:21:40,257 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 23:21:40,392 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 23:21:40,393 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 23:21:40,396 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 23:21:40,398 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 23:21:40,404 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 23:21:40,405 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 23:21:40,407 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 23:21:40,409 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 23:21:49,568 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 23:21:49,569 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 23:21:50,805 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 23:21:50,807 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 23:22:57,475 - INFO - Single data fetched: SELECT * FROM Warehouses WHERE WarehouseID = %s
+2025-05-17 23:23:41,337 - INFO - Procedure called: CalculateTotalStockValue
+2025-05-17 23:23:41,919 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 23:23:41,923 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 23:23:41,924 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 23:23:41,926 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 23:23:41,930 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 23:23:41,933 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 23:23:42,644 - INFO - Data fetched: SELECT * FROM SupplierDeliveryHistory
+2025-05-17 23:23:43,759 - INFO - Data fetched: 
+        SELECT ih.*, p.ProductName, w.WarehouseName 
+        FROM InventoryHistory ih
+        JOIN Products p ON ih.ProductID = p.ProductID
+        JOIN Warehouses w ON ih.WarehouseID = w.WarehouseID
+        WHERE DATE(ih.TransactionDate) BETWEEN %s AND %s
+        ORDER BY ih.TransactionDate DESC
+        
+2025-05-17 23:23:44,372 - INFO - Data fetched: SELECT * FROM SupplierDeliveryHistory
+2025-05-17 23:23:44,929 - INFO - Data fetched: 
+        SELECT ih.*, p.ProductName, w.WarehouseName 
+        FROM InventoryHistory ih
+        JOIN Products p ON ih.ProductID = p.ProductID
+        JOIN Warehouses w ON ih.WarehouseID = w.WarehouseID
+        WHERE DATE(ih.TransactionDate) BETWEEN %s AND %s
+        ORDER BY ih.TransactionDate DESC
+        
+2025-05-18 02:27:24,170 - INFO - Attempting to connect to database (Attempt 1): inventory_db on localhost
+2025-05-18 02:27:24,604 - INFO - Connected to MySQL server version 8.0.40
+2025-05-18 02:28:51,699 - INFO - Attempting to connect to database (Attempt 1): inventory_db on localhost
+2025-05-18 02:28:51,990 - INFO - Connected to MySQL server version 8.0.40
+2025-05-18 02:29:24,465 - INFO - Attempting to connect to database (Attempt 1): inventory_db on localhost
+2025-05-18 02:29:24,726 - INFO - Connected to MySQL server version 8.0.40
+2025-05-18 02:30:56,980 - INFO - Attempting to connect to database (Attempt 1): inventory_db on localhost
+2025-05-18 02:30:57,479 - INFO - Connected to MySQL server version 8.0.40
+2025-05-18 02:34:00,853 - INFO - Attempting to connect to database (Attempt 1): inventory_db on localhost
+2025-05-18 02:34:01,152 - INFO - Connected to MySQL server version 8.0.40
+2025-05-18 02:37:09,587 - INFO - Attempting to connect to database (Attempt 1): inventory_db on localhost
+2025-05-18 02:37:09,902 - INFO - Connected to MySQL server version 8.0.40
+2025-05-18 02:37:59,652 - INFO - Attempting to connect to database (Attempt 1): inventory_db on localhost
+2025-05-18 02:37:59,928 - INFO - Connected to MySQL server version 8.0.40
+2025-05-18 02:47:08,507 - INFO - Attempting to connect to database (Attempt 1): inventory_db on localhost
+2025-05-18 02:47:08,849 - INFO - Connected to MySQL server version 8.0.40

@@ -2,22 +2,20 @@ import os
 from dotenv import load_dotenv
 import logging
 
-# Load environment variables from .env file (if it exists)
-# This allows you to override settings without changing code
+# Load environment variables from .env file
 load_dotenv()
 
 # Database configuration
-# Format: Get from environment variable if exists, otherwise use default value
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_USER = os.getenv("DB_USER", "root")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "")  # Empty default password
+DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 DB_NAME = os.getenv("DB_NAME", "inventory_db")
-DB_PORT = int(os.getenv("DB_PORT", "3306"))  # Default MySQL port
+DB_PORT = int(os.getenv("DB_PORT", "3306"))
 
 # Application settings
 APP_NAME = os.getenv("APP_NAME", "Inventory Management System")
 APP_VERSION = os.getenv("APP_VERSION", "1.0.0")
-APP_DEBUG = os.getenv("APP_DEBUG", "False").lower() == "true"  # Convert string to boolean
+APP_DEBUG = os.getenv("APP_DEBUG", "False").lower() == "true"
 
 # Logging configuration
 LOG_FILE = os.getenv("LOG_FILE", "inventory_system.log")
