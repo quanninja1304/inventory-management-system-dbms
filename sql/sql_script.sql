@@ -2,7 +2,7 @@
 CREATE DATABASE inventory_db;
 USE inventory_db;
 
--- Tạo bảng Suppliers
+-- Create Suppliers Table
 CREATE TABLE Suppliers (
     SupplierID INT AUTO_INCREMENT PRIMARY KEY,
     SupplierName VARCHAR(100) NOT NULL,
