@@ -810,3 +810,131 @@
         
 2025-05-17 15:26:46,904 - INFO - Data fetched: SELECT * FROM Warehouses
 2025-05-17 15:26:46,905 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 18:35:11,550 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 18:35:11,959 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 18:35:12,076 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:35:12,078 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 18:35:12,080 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 18:35:12,084 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 18:35:12,087 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 18:35:12,089 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:35:12,090 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 18:35:12,091 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 18:35:23,081 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 18:35:23,370 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 18:35:23,455 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:35:23,456 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 18:35:23,458 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 18:35:23,460 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 18:35:23,464 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 18:35:23,467 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:35:23,469 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 18:35:23,470 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 18:37:11,175 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 18:37:11,451 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 18:37:11,517 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:37:11,519 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 18:37:11,522 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 18:37:11,524 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 18:37:11,529 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 18:37:11,530 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:37:11,533 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 18:37:11,534 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 18:37:13,517 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 18:37:13,518 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 18:37:15,065 - ERROR - Query execution error: DELETE FROM Products WHERE ProductID = %s - 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`inventory_db`.`inventory`, CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `products` (`ProductID`))
+2025-05-17 18:37:34,430 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 18:37:34,432 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 18:37:36,738 - INFO - Query executed: 
+        INSERT INTO Products (ProductName, Description, UnitPrice, SupplierID) 
+        VALUES (%s, %s, %s, %s)
+        
+2025-05-17 18:37:36,739 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:37:36,741 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:37:36,743 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 18:37:36,744 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 18:37:38,225 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 18:37:38,228 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 18:37:39,745 - INFO - Query executed: DELETE FROM Products WHERE ProductID = %s
+2025-05-17 18:37:39,747 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:37:39,750 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:37:39,754 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 18:37:39,758 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 18:37:40,910 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 18:37:40,913 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 18:37:42,656 - ERROR - Query execution error: DELETE FROM Products WHERE ProductID = %s - 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`inventory_db`.`inventory`, CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `products` (`ProductID`))
+2025-05-17 18:37:54,711 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 18:37:54,713 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 18:37:56,074 - ERROR - Query execution error: DELETE FROM Products WHERE ProductID = %s - 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`inventory_db`.`inventory`, CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `products` (`ProductID`))
+2025-05-17 18:37:57,974 - INFO - Single data fetched: SELECT * FROM Warehouses WHERE WarehouseID = %s
+2025-05-17 18:37:59,241 - ERROR - Query execution error: DELETE FROM Warehouses WHERE WarehouseID = %s - 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`inventory_db`.`inventory`, CONSTRAINT `inventory_ibfk_2` FOREIGN KEY (`WarehouseID`) REFERENCES `warehouses` (`WarehouseID`))
