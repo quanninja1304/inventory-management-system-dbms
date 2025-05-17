@@ -1,23 +1,26 @@
 import mysql.connector
 from mysql.connector import Error
 import logging
+from config import DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, configure_logging
 
 class DatabaseConnection:
-    def __init__(self, host="localhost", user="root", password="", database="inventory_db"):
+    def __init__(self, host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database=DB_NAME):
         self.host = host
         self.user = user
         self.password = password
         self.database = database
         self.connection = None
         self.cursor = None
-        self.setup_logging()
         
-    def setup_logging(self):
-        logging.basicConfig(filename='inventory_system.log', level=logging.INFO,
-                            format='%(asctime)s - %(levelname)s - %(message)s')
+        # Use the configure_logging function from config.py
+        configure_logging()
+        
+        # Connect to the database immediately during initialization
+        self.connect()
     
     def connect(self):
         try:
+            logging.info(f"Attempting to connect to database: {self.database} on {self.host}")
             self.connection = mysql.connector.connect(
                 host=self.host,
                 user=self.user,
@@ -27,8 +30,12 @@ class DatabaseConnection:
             
             if self.connection.is_connected():
                 self.cursor = self.connection.cursor(dictionary=True)
-                logging.info("Database connection established")
+                db_info = self.connection.get_server_info()
+                logging.info(f"Connected to MySQL server version {db_info}")
                 return True
+            else:
+                logging.error("Failed to establish a connection")
+                return False
         except Error as e:
             logging.error(f"Database connection error: {e}")
             return False

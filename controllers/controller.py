@@ -1,6 +1,6 @@
-from database import DatabaseConnection
-from models import Product, Supplier, Warehouse, Inventory, StockEntry, InventoryHistory
-from view import MainView
+from database.database import DatabaseConnection
+from models.models import Product, Supplier, Warehouse, Inventory, StockEntry, InventoryHistory
+from views.view import MainView
 import tkinter as tk
 from datetime import datetime
 
