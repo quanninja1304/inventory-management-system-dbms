@@ -938,3 +938,62 @@
 2025-05-17 18:37:56,074 - ERROR - Query execution error: DELETE FROM Products WHERE ProductID = %s - 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`inventory_db`.`inventory`, CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `products` (`ProductID`))
 2025-05-17 18:37:57,974 - INFO - Single data fetched: SELECT * FROM Warehouses WHERE WarehouseID = %s
 2025-05-17 18:37:59,241 - ERROR - Query execution error: DELETE FROM Warehouses WHERE WarehouseID = %s - 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`inventory_db`.`inventory`, CONSTRAINT `inventory_ibfk_2` FOREIGN KEY (`WarehouseID`) REFERENCES `warehouses` (`WarehouseID`))
+2025-05-17 18:52:04,891 - INFO - Attempting to connect to database: inventory_db on localhost
+2025-05-17 18:52:05,243 - INFO - Connected to MySQL server version 8.0.40
+2025-05-17 18:52:05,315 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:52:05,316 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 18:52:05,320 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 18:52:05,322 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-17 18:52:05,326 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-17 18:52:05,327 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:52:05,328 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 18:52:05,329 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 18:52:09,368 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 18:52:09,370 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 18:52:13,069 - INFO - Query executed: 
+        UPDATE Products 
+        SET ProductName = %s, Description = %s, UnitPrice = %s, SupplierID = %s 
+        WHERE ProductID = %s
+        
+2025-05-17 18:52:13,071 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:52:13,074 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-17 18:52:13,075 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-17 18:52:13,076 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-17 18:52:15,535 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 18:52:15,537 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 18:52:15,984 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 18:52:15,987 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 18:52:16,349 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 18:52:16,351 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 18:52:16,658 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 18:52:16,660 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 18:52:17,065 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 18:52:17,066 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
+2025-05-17 18:52:17,341 - INFO - Single data fetched: SELECT * FROM Products WHERE ProductID = %s
+2025-05-17 18:52:17,343 - INFO - Single data fetched: SELECT * FROM Suppliers WHERE SupplierID = %s
