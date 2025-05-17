@@ -45,9 +45,21 @@ pip install -r requirements.txt
 ## 📁 Project Structure
 ```
 inventory-management-system-dbms/  
-├── main.py                 # Entry point  
-├── models/                 # Product, Supplier, Inventory, etc.  
-├── view/                   # tkinter UI components  
-├── database.py             # DB connection handler  
-├── requirements.txt  
+├── app/
+│   ├── __init__.py
+│   ├── controllers/        # Business logic
+│   │   └── __init__.py
+│   ├── models/             # Product, Supplier, Inventory, etc.
+│   │   └── __init__.py  
+│   ├── views/              # tkinter UI components
+│   │   └── __init__.py
+│   └── database/
+│       ├── __init__.py
+│       └── database.py   # DB connection handler (uses env vars)
+├── config.py               # Configuration loading (from env vars)
+├── main.py                 # Entry point
+├── .env                    # Environment variables (add to .gitignore)
+├── .env.example            # Example env file with dummy values (commit this)
+├── .gitignore              # Already configured
+├── requirements.txt
 └── README.md
