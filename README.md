@@ -19,6 +19,14 @@ Features a relational MySQL database and a user-friendly GUI built with `tkinter
 - MySQL Server
 - MySQL Workbench (optional)
 - pip (Python package manager)
+- Python 3.8 or higher
+- MySQL Server
+- `tkinter` (comes with Python on Windows/macOS)
+
+  - If you're on Linux, install with:
+    ```bash
+    sudo apt-get install python3-tk
+    ```
 
 ---
 
