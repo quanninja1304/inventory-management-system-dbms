@@ -7,6 +7,10 @@ import hashlib
 import os
 from PIL import Image, ImageTk
 import io
+from config import (
+    DB_HOST, DB_USER, DB_PASSWORD, DB_NAME,
+    configure_logging
+)
 
 class LoginApp:
     def __init__(self, root):
@@ -25,10 +29,10 @@ class LoginApp:
         
         # Database configuration
         self.db_config = {
-            'host': 'localhost',
-            'user': 'root',
-            'password': 'quan156323',
-            'database': 'inventory_db'
+            'host': DB_HOST,
+            'user': DB_USER,
+            'password': DB_PASSWORD,
+            'database': DB_NAME
         }
         
         # Font configuration

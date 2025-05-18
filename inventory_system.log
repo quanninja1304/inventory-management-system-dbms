@@ -1223,3 +1223,84 @@
         
 2025-05-18 18:15:13,529 - INFO - Data fetched: SELECT * FROM Warehouses
 2025-05-18 18:15:13,531 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-18 20:15:28,937 - INFO - Database connection established
+2025-05-18 20:15:28,941 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-18 20:15:28,943 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-18 20:15:28,945 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-18 20:15:28,948 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-18 20:15:28,951 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-18 20:15:28,952 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-18 20:15:28,952 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-18 20:15:28,953 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-18 20:52:39,273 - INFO - Database connection established
+2025-05-18 20:52:39,273 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-18 20:52:39,273 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-18 20:52:39,289 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-18 20:52:39,289 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-18 20:52:39,289 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-18 20:52:39,289 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-18 20:52:39,289 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-18 20:52:39,289 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-18 21:35:22,249 - INFO - Database connection established
+2025-05-18 21:35:22,269 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-18 21:35:22,272 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-18 21:35:22,276 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-18 21:35:22,280 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-18 21:35:22,293 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-18 21:35:22,295 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-18 21:35:22,299 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-18 21:35:22,300 - INFO - Data fetched: SELECT * FROM Suppliers

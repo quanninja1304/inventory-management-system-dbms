@@ -1,20 +1,25 @@
 import mysql.connector
 from mysql.connector import Error
 import logging
+from config import (
+    DB_HOST, DB_USER, DB_PASSWORD, DB_NAME,
+    configure_logging
+)
+
 
 class DatabaseConnection:
-    def __init__(self, host="localhost", user="root", password="quan156323", database="inventory_db"):
+    def __init__(self, host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database=DB_NAME):
         self.host = host
         self.user = user
         self.password = password
         self.database = database
         self.connection = None
         self.cursor = None
-        self.setup_logging()
+        configure_logging()
         
-    def setup_logging(self):
-        logging.basicConfig(filename='inventory_system.log', level=logging.INFO,
-                            format='%(asctime)s - %(levelname)s - %(message)s')
+    # def setup_logging(self):
+    #     logging.basicConfig(filename='inventory_system.log', level=logging.INFO,
+    #                         format='%(asctime)s - %(levelname)s - %(message)s')
     
     def connect(self):
         try:
