@@ -1,4 +1,4 @@
-from database.database import DatabaseConnection
+from database.database_connection import DatabaseConnection
 from models.models import Product, Supplier, Warehouse, Inventory, StockEntry, InventoryHistory
 from views.view import MainView
 import tkinter as tk

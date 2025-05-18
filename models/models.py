@@ -1,4 +1,4 @@
-from database.database import DatabaseConnection
+from database.database_connection import DatabaseConnection
 from datetime import datetime
 
 class Product:
