@@ -75,26 +75,32 @@ Features a relational MySQL database and a user-friendly GUI built with `tkinter
 ---
 ## 📁 Project Structure
 ```
-inventory-management-system-dbms/
-├── controllers/                 # Business logic
+inventory_management_system/
+├── controllers/                   # Business logic connecting models and views
 │   ├── __init__.py
-│   └── controller.py            # Coordinates between model and view
-├── database/                    # DB connection
+│   ├── controller.py
+│   └── role_controller.py
+├── database/
 │   ├── __init__.py
-│   └── database.py              # Connects to MySQL using .env
-├── models/                      # Data models
+│   └── database_connection.py               # MySQL connection and execution functions
+├── models/
 │   ├── __init__.py
-│   └── models.py                # Product, supplier, inventory models
-├── views/                       # GUI components
+│   └── models.py                 # Classes representing DB entities (User, Product,..)
+├── views/
 │   ├── __init__.py
-│   └── view.py                  # tkinter UI layout
-├── sql/                         # SQL setup
-│   └── sql_script.sql           # DB schema and initial data
-├── .env                         # Environment variables (gitignored)
-├── config.py                    # Loads config from .env
-├── main.py                      # App entry point
-├── README.md                    # Project documentation
-└── requirements.txt             # Python dependencies
+│   ├── login_view.py             # Login UI
+│   ├── main_view.py              # Main dashboard UI
+│   └── view.py
+├── sql/
+│   └── schema.sql                # DB schema and initial setup
+├── ui/
+│   └── ui.png                    # UI image asset
+├── .env                          # config (ignored by Git)
+├── .gitignore                    # Ignore cache, logs, .env, etc.
+├── config.py                     # Loads config variables from .env
+├── main.py                       # App entry point: runs the whole system
+├── README.md
+└── requirements.txt              # All dependencies
 ```
 ---
 ## ⚠️ Important Notes

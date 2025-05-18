@@ -1512,3 +1512,30 @@
         WHERE DATE(ih.TransactionDate) BETWEEN %s AND %s
         ORDER BY ih.TransactionDate DESC
         
+2025-05-18 21:55:12,533 - INFO - Database connection established
+2025-05-18 21:55:12,533 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-18 21:55:12,533 - INFO - Data fetched: SELECT * FROM Suppliers
+2025-05-18 21:55:12,541 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-18 21:55:12,543 - INFO - Data fetched: 
+        SELECT p.ProductName, w.WarehouseName, i.Quantity, i.MinStockLevel, i.ProductID, i.WarehouseID
+        FROM Inventory i
+        JOIN Products p ON i.ProductID = p.ProductID
+        JOIN Warehouses w ON i.WarehouseID = w.WarehouseID
+        
+2025-05-18 21:55:12,546 - INFO - Data fetched: 
+        SELECT se.*, p.ProductName, w.WarehouseName 
+        FROM StockEntries se
+        JOIN Products p ON se.ProductID = p.ProductID
+        JOIN Warehouses w ON se.WarehouseID = w.WarehouseID
+        
+2025-05-18 21:55:12,548 - INFO - Data fetched: 
+        SELECT p.*, s.SupplierName 
+        FROM Products p
+        LEFT JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        
+2025-05-18 21:55:12,552 - INFO - Data fetched: SELECT * FROM Warehouses
+2025-05-18 21:55:12,554 - INFO - Data fetched: SELECT * FROM Suppliers
