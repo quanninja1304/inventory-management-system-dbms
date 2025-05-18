@@ -1,15 +1,13 @@
-from database.database import DatabaseConnection
-from models.models import Product, Supplier, Warehouse, Inventory, StockEntry, InventoryHistory
-from views.view import MainView
+from database import DatabaseConnection
+from models import Product, Supplier, Warehouse, Inventory, StockEntry, InventoryHistory
+from view import MainView
 import tkinter as tk
-from tkinter import messagebox
 from datetime import datetime
 
 class Controller:
-    def __init__(self, root, role):
+    def __init__(self, root):
         self.db = DatabaseConnection()
         self.view = MainView(root)
-        self.role = role  # Role: 'admin', 'employee', or 'user'
         self.product_model = Product(self.db)
         self.supplier_model = Supplier(self.db)
         self.warehouse_model = Warehouse(self.db)
@@ -19,94 +17,39 @@ class Controller:
         self.setup_event_handlers()
         self.load_initial_data()
 
-    def check_permission(self, action):
-        """Check if the user has permission for the action."""
-        if self.role == 'admin':
-            return True
-        elif self.role == 'employee':
-            return action in ['add', 'update']
-        elif self.role == 'user':
-            return action == 'view'
-        return False
-
     def setup_event_handlers(self):
-        # Bind treeview selections (view-only, allowed for all roles)
         self.view.products_tree.bind('<<TreeviewSelect>>', self.on_product_select)
+        self.view.products_tab.children['!labelframe2'].children['!frame'].children['!button'].configure(command=self.add_product)
+        self.view.products_tab.children['!labelframe2'].children['!frame'].children['!button2'].configure(command=self.update_product)
+        self.view.products_tab.children['!labelframe2'].children['!frame'].children['!button3'].configure(command=self.delete_product)
+        self.view.products_tab.children['!labelframe2'].children['!frame'].children['!button4'].configure(command=self.view.clear_product_fields)
+
         self.view.suppliers_tree.bind('<<TreeviewSelect>>', self.on_supplier_select)
+        self.view.suppliers_tab.children['!labelframe2'].children['!frame'].children['!button'].configure(command=self.add_supplier)
+        self.view.suppliers_tab.children['!labelframe2'].children['!frame'].children['!button2'].configure(command=self.update_supplier)
+        self.view.suppliers_tab.children['!labelframe2'].children['!frame'].children['!button3'].configure(command=self.delete_supplier)
+        self.view.suppliers_tab.children['!labelframe2'].children['!frame'].children['!button4'].configure(command=self.view.clear_supplier_fields)
+
         self.view.warehouses_tree.bind('<<TreeviewSelect>>', self.on_warehouse_select)
+        self.view.warehouses_tab.children['!labelframe2'].children['!frame'].children['!button'].configure(command=self.add_warehouse)
+        self.view.warehouses_tab.children['!labelframe2'].children['!frame'].children['!button2'].configure(command=self.update_warehouse)
+        self.view.warehouses_tab.children['!labelframe2'].children['!frame'].children['!button3'].configure(command=self.delete_warehouse)
+        self.view.warehouses_tab.children['!labelframe2'].children['!frame'].children['!button4'].configure(command=self.view.clear_warehouse_fields)
+
         self.view.inventory_tree.bind('<<TreeviewSelect>>', self.on_inventory_select)
+        self.view.inventory_tab.children['!labelframe'].children['!button'].configure(command=self.search_inventory)
+        self.view.inventory_tab.children['!labelframe'].children['!button2'].configure(command=self.show_all_inventory)
+        self.view.inventory_tab.children['!labelframe'].children['!button3'].configure(command=self.show_low_stock)
 
-        # Product tab buttons
-        product_frame = self.view.products_tab.children['!labelframe2'].children['!frame']
-        if self.check_permission('add'):
-            product_frame.children['!button'].configure(command=self.add_product)
-        else:
-            product_frame.children['!button'].configure(state='disabled')
-        if self.check_permission('update'):
-            product_frame.children['!button2'].configure(command=self.update_product)
-        else:
-            product_frame.children['!button2'].configure(state='disabled')
-        if self.check_permission('delete'):
-            product_frame.children['!button3'].configure(command=self.delete_product)
-        else:
-            product_frame.children['!button3'].configure(state='disabled')
-        product_frame.children['!button4'].configure(command=self.view.clear_product_fields)  # Clear is allowed for all
+        self.view.stock_entry_tab.children['!labelframe'].children['!frame'].children['!button'].configure(command=self.add_stock_entry)
+        self.view.stock_entry_tab.children['!labelframe'].children['!frame'].children['!button2'].configure(command=self.view.clear_stock_entry_fields)
 
-        # Supplier tab buttons
-        supplier_frame = self.view.suppliers_tab.children['!labelframe2'].children['!frame']
-        if self.check_permission('add'):
-            supplier_frame.children['!button'].configure(command=self.add_supplier)
-        else:
-            supplier_frame.children['!button'].configure(state='disabled')
-        if self.check_permission('update'):
-            supplier_frame.children['!button2'].configure(command=self.update_supplier)
-        else:
-            supplier_frame.children['!button2'].configure(state='disabled')
-        if self.check_permission('delete'):
-            supplier_frame.children['!button3'].configure(command=self.delete_supplier)
-        else:
-            supplier_frame.children['!button3'].configure(state='disabled')
-        supplier_frame.children['!button4'].configure(command=self.view.clear_supplier_fields)
-
-        # Warehouse tab buttons
-        # Warehouse tab buttons
-        warehouse_frame = self.view.warehouses_tab.children['!labelframe2'].children['!frame']
-        if self.check_permission('add'):
-            warehouse_frame.children['!button'].configure(command=self.add_warehouse)
-        else:
-            warehouse_frame.children['!button'].configure(state='disabled')
-        if self.check_permission('update'):
-            warehouse_frame.children['!button2'].configure(command=self.update_warehouse)
-        else:
-            warehouse_frame.children['!button2'].configure(state='disabled')
-        if self.check_permission('delete'):
-            warehouse_frame.children['!button3'].configure(command=self.delete_warehouse)
-        else:
-            warehouse_frame.children['!button3'].configure(state='disabled')
-        warehouse_frame.children['!button4'].configure(command=self.view.clear_warehouse_fields)
-
-        # Inventory tab buttons (view-only, allowed for all)
-        inventory_frame = self.view.inventory_tab.children['!labelframe']
-        inventory_frame.children['!button'].configure(command=self.search_inventory)
-        inventory_frame.children['!button2'].configure(command=self.show_all_inventory)
-        inventory_frame.children['!button3'].configure(command=self.show_low_stock)
-
-        # Stock entry tab buttons
-        stock_frame = self.view.stock_entry_tab.children['!labelframe'].children['!frame']
-        if self.check_permission('add'):
-            stock_frame.children['!button'].configure(command=self.add_stock_entry)
-        else:
-            stock_frame.children['!button'].configure(state='disabled')
-        stock_frame.children['!button2'].configure(command=self.view.clear_stock_entry_fields)
-
-        # Reports tab buttons (view-only, allowed for all)
-        reports_frame = self.view.reports_tab.children['!labelframe']
-        reports_frame.children['!button'].configure(command=self.show_low_stock_report)
-        reports_frame.children['!button2'].configure(command=self.show_stock_value_report)
-        reports_frame.children['!button3'].configure(command=self.show_stock_per_warehouse)
-        reports_frame.children['!button4'].configure(command=self.show_supplier_delivery_history)
-        reports_frame.children['!button5'].configure(command=self.show_transaction_history)
-        reports_frame.children['!labelframe'].children['!button'].configure(command=self.apply_date_range)
+        self.view.reports_tab.children['!labelframe'].children['!button'].configure(command=self.show_low_stock_report)
+        self.view.reports_tab.children['!labelframe'].children['!button2'].configure(command=self.show_stock_value_report)
+        self.view.reports_tab.children['!labelframe'].children['!button3'].configure(command=self.show_stock_per_warehouse)
+        self.view.reports_tab.children['!labelframe'].children['!button4'].configure(command=self.show_supplier_delivery_history)
+        self.view.reports_tab.children['!labelframe'].children['!button5'].configure(command=self.show_transaction_history)
+        self.view.reports_tab.children['!labelframe'].children['!labelframe'].children['!button'].configure(command=self.apply_date_range)
 
     def load_initial_data(self):
         self.load_products()
@@ -162,8 +105,6 @@ class Controller:
             self.view.stock_entry_tree.insert("", "end", values=(e['EntryID'], e['ProductName'], e['WarehouseName'], e['Quantity'], e['EntryDate']))
 
     def on_product_select(self, event):
-        if not self.check_permission('view'):
-            return
         selected = self.view.products_tree.selection()
         if selected:
             item = self.view.products_tree.item(selected[0])
@@ -177,8 +118,6 @@ class Controller:
                 self.view.product_supplier_var.set(f"{supplier['SupplierID']}: {supplier['SupplierName']}")
 
     def on_supplier_select(self, event):
-        if not self.check_permission('view'):
-            return
         selected = self.view.suppliers_tree.selection()
         if selected:
             item = self.view.suppliers_tree.item(selected[0])
@@ -190,8 +129,6 @@ class Controller:
                 self.view.supplier_phone_var.set(supplier['PhoneNumber'] or '')
 
     def on_warehouse_select(self, event):
-        if not self.check_permission('view'):
-            return
         selected = self.view.warehouses_tree.selection()
         if selected:
             item = self.view.warehouses_tree.item(selected[0])
@@ -202,8 +139,6 @@ class Controller:
                 self.view.warehouse_address_var.set(warehouse['Address'] or '')
 
     def on_inventory_select(self, event):
-        if not self.check_permission('view'):
-            return
         selected = self.view.inventory_tree.selection()
         if selected:
             item = self.view.inventory_tree.item(selected[0])
@@ -212,9 +147,6 @@ class Controller:
             self.view.inventory_warehouse_var.set(values[1])
 
     def add_product(self):
-        if not self.check_permission('add'):
-            messagebox.showerror("Permission Denied", "You do not have permission to add products.")
-            return
         name = self.view.product_name_var.get()
         desc = self.view.product_desc_var.get()
         price = self.view.product_price_var.get()
@@ -235,9 +167,6 @@ class Controller:
             self.view.show_error("Error", "Missing required fields")
 
     def update_product(self):
-        if not self.check_permission('update'):
-            messagebox.showerror("Permission Denied", "You do not have permission to update products.")
-            return
         selected = self.view.products_tree.selection()
         if selected:
             item = self.view.products_tree.item(selected[0])
@@ -262,9 +191,6 @@ class Controller:
                 self.view.show_error("Error", "Missing required fields")
 
     def delete_product(self):
-        if not self.check_permission('delete'):
-            messagebox.showerror("Permission Denied", "You do not have permission to delete products.")
-            return
         selected = self.view.products_tree.selection()
         if selected:
             item = self.view.products_tree.item(selected[0])
@@ -279,9 +205,6 @@ class Controller:
                     self.view.show_error("Error", "Failed to delete product")
 
     def add_supplier(self):
-        if not self.check_permission('add'):
-            messagebox.showerror("Permission Denied", "You do not have permission to add suppliers.")
-            return
         name = self.view.supplier_name_var.get()
         address = self.view.supplier_address_var.get()
         phone = self.view.supplier_phone_var.get()
@@ -297,9 +220,6 @@ class Controller:
             self.view.show_error("Error", "Missing required fields")
 
     def update_supplier(self):
-        if not self.check_permission('update'):
-            messagebox.showerror("Permission Denied", "You do not have permission to update suppliers.")
-            return
         selected = self.view.suppliers_tree.selection()
         if selected:
             item = self.view.suppliers_tree.item(selected[0])
@@ -319,9 +239,6 @@ class Controller:
                 self.view.show_error("Error", "Missing required fields")
 
     def delete_supplier(self):
-        if not self.check_permission('delete'):
-            messagebox.showerror("Permission Denied", "You do not have permission to delete suppliers.")
-            return
         selected = self.view.suppliers_tree.selection()
         if selected:
             item = self.view.suppliers_tree.item(selected[0])
@@ -336,9 +253,6 @@ class Controller:
                     self.view.show_error("Error", "Failed to delete supplier")
 
     def add_warehouse(self):
-        if not self.check_permission('add'):
-            messagebox.showerror("Permission Denied", "You do not have permission to add warehouses.")
-            return
         name = self.view.warehouse_name_var.get()
         address = self.view.warehouse_address_var.get()
         if name:
@@ -353,9 +267,6 @@ class Controller:
             self.view.show_error("Error", "Missing required fields")
 
     def update_warehouse(self):
-        if not self.check_permission('update'):
-            messagebox.showerror("Permission Denied", "You do not have permission to update warehouses.")
-            return
         selected = self.view.warehouses_tree.selection()
         if selected:
             item = self.view.warehouses_tree.item(selected[0])
@@ -374,9 +285,6 @@ class Controller:
                 self.view.show_error("Error", "Missing required fields")
 
     def delete_warehouse(self):
-        if not self.check_permission('delete'):
-            messagebox.showerror("Permission Denied", "You do not have permission to delete warehouses.")
-            return
         selected = self.view.warehouses_tree.selection()
         if selected:
             item = self.view.warehouses_tree.item(selected[0])
@@ -391,9 +299,6 @@ class Controller:
                     self.view.show_error("Error", "Failed to delete warehouse")
 
     def search_inventory(self):
-        if not self.check_permission('view'):
-            messagebox.showerror("Permission Denied", "You do not have permission to view inventory.")
-            return
         product = self.view.inventory_product_var.get()
         warehouse = self.view.inventory_warehouse_var.get()
         inventory = self.inventory_model.get_inventory_levels()
@@ -411,17 +316,11 @@ class Controller:
             self.load_inventory()
 
     def show_all_inventory(self):
-        if not self.check_permission('view'):
-            messagebox.showerror("Permission Denied", "You do not have permission to view inventory.")
-            return
         self.view.inventory_product_var.set("")
         self.view.inventory_warehouse_var.set("")
         self.load_inventory()
 
     def show_low_stock(self):
-        if not self.check_permission('view'):
-            messagebox.showerror("Permission Denied", "You do not have permission to view low stock.")
-            return
         for item in self.view.inventory_tree.get_children():
             self.view.inventory_tree.delete(item)
         low_stock = self.inventory_model.check_low_stock()
@@ -434,62 +333,32 @@ class Controller:
             ))
 
     def add_stock_entry(self):
-        if not self.check_permission('add'):
-            messagebox.showerror("Permission Denied", "You do not have permission to add stock entries.")
-            return
-
-        # Lấy dữ liệu từ giao diện
         product = self.view.entry_product_var.get()
         warehouse = self.view.entry_warehouse_var.get()
         quantity = self.view.entry_quantity_var.get()
         date = self.view.entry_date_var.get()
-        trans_type = self.view.entry_type_var.get()
-
-        # Kiểm tra dữ liệu đầu vào
-        if not all([product, warehouse, quantity, date, trans_type]):
-            messagebox.showerror("Error", "All fields are required.")
-            return
-
-        try:
-            # Trích xuất ID từ combobox
-            product_id = int(product.split(":")[0])
-            warehouse_id = int(warehouse.split(":")[0])
-            quantity = int(quantity)
-
-            # Xử lý số lượng âm cho Sale/Adjustment
-            if trans_type in ["Sale", "Adjustment"]:
-                quantity = -quantity
-
-            # Kiểm tra ngày hợp lệ
+        trans_type = self.entry_type_var.get()
+        if product and warehouse and quantity:
             try:
-                datetime.strptime(date, '%Y-%m-%d')
-            except ValueError:
-                messagebox.showerror("Error SovietError", "Invalid date format. Use YYYY-MM-DD.")
-                return
-
-            # Thêm bản ghi stock entry
-            if self.stock_entry_model.add_stock_entry(product_id, warehouse_id, abs(quantity), date):
-                # Thêm bản ghi lịch sử giao dịch
-                if self.history_model.add_history_entry(product_id, warehouse_id, quantity, trans_type, date):
-                    # Cập nhật giao diện
+                product_id = int(product.split(":")[0])
+                warehouse_id = int(warehouse.split(":")[0])
+                quantity = int(quantity)
+                if trans_type in ["Sale", "Adjustment"]:
+                    quantity = -quantity
+                if self.stock_entry_model.add_stock_entry(product_id, warehouse_id, abs(quantity), date):
+                    self.history_model.add_history_entry(product_id, warehouse_id, quantity, trans_type, date)
                     self.load_stock_entries()
                     self.load_inventory()
                     self.view.clear_stock_entry_fields()
-                    messagebox.showinfo("Success", f"Stock entry ({trans_type}) added successfully.")
+                    self.view.show_info("Success", "Stock entry added")
                 else:
-                    messagebox.showerror("Error", "Failed to record transaction history.")
-            else:
-                messagebox.showerror("Error", "Failed to add stock entry.")
-
-        except ValueError as e:
-            messagebox.showerror("Error", "Invalid input: Please check quantity or selection.")
-        except Exception as e:
-            messagebox.showerror("Error", f"An error occurred: {str(e)}")
+                    self.view.show_error("Error", "Failed to add stock entry")
+            except ValueError:
+                self.view.show_error("Error", "Invalid input")
+        else:
+            self.view.show_error("Error", "Missing required fields")
 
     def show_low_stock_report(self):
-        if not self.check_permission('view'):
-            messagebox.showerror("Permission Denied", "You do not have permission to view reports.")
-            return
         self.view.report_text.delete(1.0, tk.END)
         low_stock = self.inventory_model.check_low_stock()
         report = "Low Stock Report\n\n"
@@ -498,18 +367,12 @@ class Controller:
         self.view.report_text.insert(tk.END, report)
 
     def show_stock_value_report(self):
-        if not self.check_permission('view'):
-            messagebox.showerror("Permission Denied", "You do not have permission to view reports.")
-            return
         self.view.report_text.delete(1.0, tk.END)
         value = self.inventory_model.calculate_total_stock_value()
         report = f"Stock Value Report\n\nTotal Value: ${value:.2f}\n"
         self.view.report_text.insert(tk.END, report)
 
     def show_stock_per_warehouse(self):
-        if not self.check_permission('view'):
-            messagebox.showerror("Permission Denied", "You do not have permission to view reports.")
-            return
         self.view.report_text.delete(1.0, tk.END)
         report = "Stock Per Warehouse Report\n\n"
         warehouses = self.warehouse_model.get_all_warehouses()
@@ -523,9 +386,6 @@ class Controller:
         self.view.report_text.insert(tk.END, report)
 
     def show_supplier_delivery_history(self):
-        if not self.check_permission('view'):
-            messagebox.showerror("Permission Denied", "You do not have permission to view reports.")
-            return
         self.view.report_text.delete(1.0, tk.END)
         history = self.supplier_model.get_supplier_delivery_history()
         report = "Supplier Delivery History\n\n"
@@ -534,9 +394,6 @@ class Controller:
         self.view.report_text.insert(tk.END, report)
 
     def show_transaction_history(self):
-        if not self.check_permission('view'):
-            messagebox.showerror("Permission Denied", "You do not have permission to view reports.")
-            return
         self.view.report_text.delete(1.0, tk.END)
         start_date = self.view.report_from_date_var.get()
         end_date = self.view.report_to_date_var.get()
@@ -547,7 +404,16 @@ class Controller:
         self.view.report_text.insert(tk.END, report)
 
     def apply_date_range(self):
-        if not self.check_permission('view'):
-            messagebox.showerror("Permission Denied", "You do not have permission to view reports.")
-            return
         self.show_transaction_history()
+
+
+
+
+
+        import ttkbootstrap as ttk
+from controller import Controller
+
+if __name__ == "__main__":
+    root = ttk.Window()  # Use "flatly" to avoid litera issues; revert to "litera" if resolved
+    app = Controller(root)
+    root.mainloop()
