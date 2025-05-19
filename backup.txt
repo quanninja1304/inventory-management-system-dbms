@@ -1,3 +1,21 @@
+###############################################################################
+# BACKUP FILE - Inventory Management System
+# Created: May 19, 2025
+# 
+# This is an automated backup of the inventory management system source code.
+# DO NOT modify this file directly. Instead, make changes to the original
+# source files and create a new backup if needed.
+#
+# Backup contents:
+# - Controller module (controller.py)
+# - Main application entry point
+#
+# Restore procedure:
+# 1. Copy the contents to appropriate .py files
+# 2. Ensure all dependencies are installed
+# 3. Run the main application file
+###############################################################################
+
 from database import DatabaseConnection
 from models import Product, Supplier, Warehouse, Inventory, StockEntry, InventoryHistory
 from view import MainView
