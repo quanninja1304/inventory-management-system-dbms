@@ -24,7 +24,7 @@ class DatabaseConnection:
     def connect(self):
         try:
             self.connection = mysql.connector.connect(
-                host=self.host,
+                host=self.host or '127.0.0.1',
                 user=self.user,
                 password=self.password,
                 database=self.database
