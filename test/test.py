@@ -5,8 +5,8 @@ import numpy as np
 # Replace with your actual database credentials
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'root',
-    'password': 'quan156323',
+    'user': 'username',
+    'password': 'your_password',
     'database': 'inventory_db'
 }
 
